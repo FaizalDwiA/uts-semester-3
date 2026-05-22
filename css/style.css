@@ -1,116 +1,795 @@
+/* 
+ * "Perkembangan Windows" Modern CSS Stylesheet
+ * Crafted with premium dark-space aesthetics, glassmorphism, and neon glow effects.
+ */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+/* Color Variables & Styling Tokens */
+:root {
+    --bg-dark: #070a13;
+    --bg-darker: #04060a;
+    --primary: #0078d4;
+    --primary-glow: rgba(0, 120, 212, 0.35);
+    --accent: #00f2fe;
+    --accent-glow: rgba(0, 242, 254, 0.35);
+    --purple: #8a2be2;
+    --purple-glow: rgba(138, 43, 226, 0.3);
+    
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    --glass-bg: rgba(15, 23, 42, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-glow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Global Styles */
 * {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
-.container {
-    width: 100%;
-    height: 1000px;
+html {
+    scroll-behavior: smooth;
 }
 
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-darker);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    border: 2px solid var(--bg-darker);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 1. Sleek Frosty Navigation */
 nav {
     position: fixed;
-    z-index: 3;
+    z-index: 100;
     top: 0;
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    background-color: #51CAFF;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(7, 10, 19, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 
 nav h2 {
-    padding: 5px;
-    margin-left: 40px;
-    font-size: 30px;
-    text-shadow: 1px 1px 10px rgba(255, 255, 255, .5);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 nav h2 a {
-    color: #000;
+    color: var(--text-main);
     text-decoration: none;
+    background: linear-gradient(135deg, #ffffff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: var(--transition);
+}
+
+nav h2 a:hover {
+    filter: brightness(1.2);
 }
 
 nav ul {
-    width: 30%;
     display: flex;
-    margin-right: 40px;
-    justify-content: space-around;
+    gap: 30px;
     align-items: center;
     list-style: none;
 }
 
-nav ul li {
-    transition: .3s;
-}
-
 nav ul li a {
     text-decoration: none;
-    color: #c6efff;
-    font-size: 20px;
-    font-weight: bold;
+    color: var(--text-muted);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding: 5px 0;
+    transition: var(--transition);
 }
 
-nav ul li:hover, nav ul li a:hover {
-    color: #fff;
-    transform: scale(1.3);
+nav ul li a:hover {
+    color: var(--text-main);
 }
 
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transition: var(--transition);
+}
 
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* 2. Floating Sidebar Menu Tab */
 .daftarIsi {
     position: fixed;
-    top: 40%;
-    font-size: 13px;
-    background-color: #51CAFF;
-    opacity: .7;
-    padding: 10px;
-    height: max-content;
-    border-radius: 0 50% 50% 0;
-    transition: .8s;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 150;
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid var(--glass-border);
+    border-left: none;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: var(--accent);
+    padding: 14px 18px;
+    border-radius: 0 30px 30px 0;
+    box-shadow: 0 10px 45px rgba(0, 242, 254, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
 }
 
-.daftarIsi.muncul {
-    transform: translateX(250px);
+.daftarIsi svg {
+    transition: transform 0.4s ease;
+}
+
+.daftarIsi span {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    text-transform: uppercase;
 }
 
 .daftarIsi:hover {
-    cursor: pointer;
-    opacity: 1;
+    background: var(--primary);
+    color: #ffffff;
+    padding-left: 24px;
+    box-shadow: 0 10px 30px var(--primary-glow);
+}
+
+.daftarIsi:hover svg {
+    transform: rotate(90deg);
+}
+
+.daftarIsi.muncul {
+    transform: translateY(-50%) translateX(280px);
+    border-radius: 0 30px 30px 0;
+    background: var(--bg-darker);
+    border-color: var(--primary);
 }
 
 .isiDaftar {
     position: fixed;
-    background-color: rgba(0, 0, 0, .9);
-    width: 20%;
-    height: 100vh;
-    z-index: 6;
+    left: 0;
     top: 0;
+    width: 280px;
+    height: 100vh;
+    background: rgba(4, 6, 10, 0.95);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-right: 1px solid var(--glass-border);
+    z-index: 90;
     transform: translateX(-100%);
-    transition: .8s;
+    transition: var(--transition);
     opacity: 0;
-}
-
-.isiDaftar ul {
-    padding-top: 50px;
-    text-align: center;
-    list-style: none;
-}
-
-.isiDaftar li {
-    font-size: 20px;
-    margin: 50px 0;
-}
-
-.isiDaftar li a {
-    color: #c6efff;
-    text-decoration: none;
+    box-shadow: 20px 0 80px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .isiDaftar.muncul {
-    transform: translate(0);
+    transform: translateX(0);
     opacity: 1;
 }
 
+.isiDaftar ul {
+    list-style: none;
+    padding: 50px 30px;
+}
 
+.isiDaftar li {
+    margin: 35px 0;
+}
+
+.isiDaftar li a {
+    color: var(--text-muted);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+    position: relative;
+}
+
+.isiDaftar li a:hover {
+    color: var(--accent);
+    transform: translateX(10px);
+}
+
+.isiDaftar li a::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    transition: var(--transition);
+}
+
+.isiDaftar li a:hover::before {
+    transform: translateY(-50%) scale(1);
+}
+
+/* 3. Hero Header Section */
+header {
+    position: relative;
+    background-image: linear-gradient(to bottom, rgba(7, 10, 19, 0.2) 30%, var(--bg-dark) 98%), url(../img/background.webp);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 85vh;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 50% 35%, rgba(0, 242, 254, 0.18), transparent 55%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 45px 45px, 45px 45px;
+    background-position: center;
+    mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+header h1 {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, #ffffff 40%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 40px rgba(0, 242, 254, 0.15);
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 40px;
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 13px;
+    display: block;
+    animation: bounceScroll 2s infinite;
+}
+
+@keyframes heroFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceScroll {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(10px);
+        opacity: 1;
+    }
+}
+
+/* 4. Elegant Introductions (.pembuka) */
+.pembuka {
+    max-width: 1200px;
+    margin: -80px auto 40px;
+    padding: 0 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    z-index: 10;
+    position: relative;
+}
+
+.pembuka p {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 24px;
+    text-align: justify;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    box-shadow: var(--glass-glow);
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.pembuka p:hover {
+    border-color: rgba(0, 242, 254, 0.25);
+    box-shadow: 0 10px 40px rgba(0, 242, 254, 0.1);
+}
+
+.pembuka p.pKiri {
+    transform: translateX(-50px) scale(0.96);
+}
+
+.pembuka p.pKanan {
+    transform: translateX(50px) scale(0.96);
+}
+
+.pembuka p.muncul {
+    opacity: 1;
+    transform: translate(0) scale(1);
+}
+
+/* 5. Generic Section Styles */
+section {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 40px 30px;
+}
+
+section h2 {
+    font-family: var(--font-heading);
+    font-size: 2.75rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #ffffff 40%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.glow-hr, section hr {
+    position: relative;
+    margin: 0 auto 50px;
+    width: 180px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--primary), var(--accent), transparent);
+    border: none;
+}
+
+.glow-hr::after, section hr::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent), 0 0 4px #ffffff;
+    border: 2px solid var(--bg-dark);
+}
+
+section .isi {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+/* 6. Pengertian Section */
+.pengertian .isi {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 50px;
+    border-radius: 24px;
+    box-shadow: var(--glass-glow);
+    text-align: justify;
+}
+
+/* 7. Fungsi Utama Grid Cards */
+.fungsi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+}
+
+.fungsi-grid li {
+    position: relative;
+    overflow: hidden;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 35px;
+    border-radius: 24px;
+    display: flex;
+    gap: 25px;
+    box-shadow: var(--glass-glow);
+    transition: var(--transition);
+    z-index: 1;
+}
+
+.fungsi-grid li::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.06) 0%, transparent 65%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.fungsi-grid li:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 242, 254, 0.25);
+    box-shadow: 0 15px 40px rgba(0, 242, 254, 0.12);
+}
+
+.fungsi-grid li:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.fungsi-grid .icon-box {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: rgba(0, 120, 212, 0.1);
+    border: 1px solid rgba(0, 120, 212, 0.2);
+    color: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.fungsi-grid li:hover .icon-box {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 0 20px var(--primary-glow);
+    border-color: var(--primary);
+}
+
+.fungsi-grid .icon-box svg {
+    width: 28px;
+    height: 28px;
+}
+
+.fungsi-grid .text-box h3 {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 10px;
+}
+
+.fungsi-grid .text-box p {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* 8. Sejarah Section & Showcase Dashboard */
+.sejarah .isi > p {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Dashboard Core Layout */
+.logo .dipilih {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 28px;
+    padding: 50px;
+    box-shadow: var(--glass-glow);
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 50px;
+    align-items: start;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo .dipilih::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* Device Mock Frame Wrapper */
+.logo .dipilih-image-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+}
+
+.logo .dipilih img {
+    max-width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo .dipilih:hover img {
+    transform: scale(1.04);
+}
+
+.dipilih .text {
+    width: 100%;
+}
+
+/* Individual OS Content Container */
+.dipilih .text > div {
+    animation: tabContentFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes tabContentFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.dipilih .text h3 {
+    font-family: var(--font-heading);
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 25px 0 12px;
+    background: linear-gradient(90deg, #ffffff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.dipilih .text h3:first-of-type {
+    margin-top: 0;
+}
+
+.dipilih .text p {
+    text-align: justify;
+    line-height: 1.8;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+}
+
+.dipilih .text hr {
+    margin: 30px 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+}
+
+/* Beautiful Taskbar Dock (.opsi) with Timeline Track */
+.opsi {
+    position: relative;
+    background: rgba(10, 15, 30, 0.7);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 18px 30px;
+    border-radius: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    box-shadow: var(--glass-glow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    margin: 20px auto 0;
+    max-width: 95%;
+    z-index: 2;
+}
+
+.opsi::before {
+    content: '';
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.15) 20%, var(--primary-glow) 50%, rgba(0, 242, 254, 0.15) 80%, transparent);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.opsi img {
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
+    padding: 10px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    opacity: 0.45;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.opsi img:hover {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.12);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent);
+    box-shadow: 0 10px 25px rgba(0, 242, 254, 0.25);
+}
+
+/* Add custom active style class for JS to toggle */
+.opsi img.active {
+    opacity: 1;
+    background: rgba(0, 120, 212, 0.15);
+    border-color: var(--primary);
+    box-shadow: 0 0 15px rgba(0, 120, 212, 0.3);
+    transform: scale(1.05);
+}
+
+/* 9. Video Section */
+.video .isi {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.video .yt {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 800px !important;
+    height: auto !important;
+    aspect-ratio: 16/9 !important;
+    margin: 0 auto !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+    background: var(--bg-darker) !important;
+}
+
+.video .yt iframe {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0 !important;
+}
+
+/* 10. Penutup / Kesimpulan */
+.kesimpulan .isi {
+    background: linear-gradient(135deg, rgba(0, 120, 212, 0.1), rgba(138, 43, 226, 0.05));
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 50px;
+    border-radius: 28px;
+    box-shadow: var(--glass-glow);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.kesimpulan .isi::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.kesimpulan .isi p {
+    font-size: 1.15rem;
+    line-height: 2;
+    color: var(--text-main);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 11. Custom Banner Ad Overlay if displayed */
 .banner {
     display: none;
     position: fixed;
@@ -118,198 +797,184 @@ nav ul li:hover, nav ul li a:hover {
     left: 0;
     bottom: 0;
     top: 0;
-    z-index: 9;
-    background-color: rgba(0, 0, 0, .95);
-    justify-content: center;
-    align-items: center;
-}
-
-.banner .isi {
-    border: 3px solid #51CAFF;
-    position: relative;
-}
-
-.banner a .isi img {
-    width: 800px;
-    margin-bottom: -4px;
-}
-
-.banner .isi .close {
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    border-radius: 50%;
-    background-color: #000;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-    color: #fff;
-    border: 3px solid #51CAFF;
-}
-
-.banner .isi .close:hover {
-    color: red;
-}
-
-
-header {
-    margin-top: 40px;
-    background-image: url(../img/background.webp);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 0 -70px;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-header h1 {
-    font-size: 80px;
-    text-shadow: 1px 1px 10px rgba(0, 0, 0, .5);
-    color: #fff;
-    transition: .5s;
-}
-
-.pembuka {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: -140px;
-}
-
-.pembuka p {
-    padding: 100px 50px;
-    text-align: justify;
-    opacity: 0;
-    line-height: 20px;
-    transition: 1s;
-}
-
-.pembuka p.pKiri {
-    transform: translate(-100px, -100px) rotate(45deg);
-}
-
-.pembuka p.pKanan {
-    transform: translate(100px, -100px) rotate(-45deg);
-}
-
-.pembuka p.muncul {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0);
-}
-
-
-section {
-    padding: 80px 150px;
-}
-
-section h2 {
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-section hr {
-    margin: auto;
-    width: 20%;
-    border: 2px solid #939597;
-}
-
-section .isi {
-    padding: 30px;
-}
-
-section .isi p {
-    text-align: justify;
-    line-height: 20px;
-}
-
-.fungsi .isi ul li {
-    margin-bottom: 20px;
-}
-
-
-.sejarah .isi p {
-    margin-bottom: 20px;
-}
-
-.logo .dipilih {
-    margin: auto;
-    width: 100%;
-    display: flex;
-}
-
-.logo .dipilih img {
-    width: 300px;
-    height: 300px;
-    margin-right: 50px;
-    box-shadow: 0 0 1px 1px #51CAFF;
-}
-
-.dipilih .text p {
-    text-align: justify;
-    line-height: 20px;
-}
-
-.dipilih .text hr {
-    margin: 10px 0;
-    width: 100%;
-}
-
-.dipilih .text h3 {
-    margin-bottom: 10px;
-}
-
-.opsi {
-    padding: 15px;
-    box-shadow: 0 0 2.5px 2.5px #51CAFF;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-.opsi img {
-    width: 150px;
-    margin: 10px;
-    opacity: .45;
-    transition: .5s;
-}
-
-.opsi img:hover {
-    cursor: pointer;
-    opacity: 1;
-}
-
-.video .isi {
-    display: flex;
-    justify-content: center;
-}
-
-.video .yt {
-    margin: auto;
-}
-
-.kesimpulan .isi p {
-    line-height: 40px;
-}
-
-
-footer {
-    background-color: #000;
-    display: flex;
+    z-index: 1000;
+    background-color: rgba(4, 6, 10, 0.85);
+    backdrop-filter: blur(8px);
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
+.banner .isi {
+    border: 1px solid var(--glass-border);
+    background: var(--bg-darker);
+    border-radius: 20px;
+    padding: 10px;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+    max-width: 90%;
+}
+
+.banner a .isi img {
+    width: 100%;
+    max-width: 750px;
+    border-radius: 12px;
+    display: block;
+}
+
+.banner .isi .close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    border-radius: 50%;
+    background-color: #ef4444;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #fff;
+    border: 2px solid #fff;
+    cursor: pointer;
+    font-weight: 800;
+    transition: var(--transition);
+}
+
+.banner .isi .close:hover {
+    transform: scale(1.1) rotate(90deg);
+    background-color: #dc2626;
+}
+
+/* 12. Footer Section */
+footer {
+    background-color: var(--bg-darker);
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    margin-top: auto;
+}
+
 footer p {
-    font-size: 20px;
-    color: rgb(185, 185, 185);
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-family: var(--font-heading);
+    font-weight: 500;
 }
 
 footer p a {
     text-decoration: none;
-    color: #84d9fe;
+    color: var(--accent);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+footer p a:hover {
+    color: var(--primary);
+    text-shadow: 0 0 8px var(--primary-glow);
+}
+
+/* 13. High-Fidelity Responsive Media Queries */
+@media (max-width: 1024px) {
+    nav ul {
+        gap: 20px;
+    }
+    
+    header h1 {
+        font-size: 4rem;
+    }
+    
+    .pembuka {
+        grid-template-columns: 1fr;
+        margin-top: -40px;
+    }
+    
+    .pembuka p {
+        padding: 30px;
+    }
+    
+    .logo .dipilih {
+        grid-template-columns: 1fr;
+        padding: 40px 30px;
+        gap: 30px;
+    }
+    
+    .logo .dipilih-image-wrapper {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 15px 25px;
+    }
+    
+    nav ul {
+        display: none; /* Hide top nav links on smaller screens */
+    }
+    
+    header h1 {
+        font-size: 3rem;
+        letter-spacing: -1px;
+    }
+    
+    section {
+        margin: 50px auto;
+        padding: 20px 20px;
+    }
+    
+    section h2 {
+        font-size: 2.2rem;
+    }
+    
+    .fungsi-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .fungsi-grid li {
+        padding: 25px;
+    }
+    
+    .pengertian .isi, .kesimpulan .isi {
+        padding: 30px 20px;
+    }
+    
+    .opsi {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+    
+    .opsi img {
+        width: 58px;
+        height: 58px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2.4rem;
+    }
+    
+    section h2 {
+        font-size: 1.85rem;
+    }
+    
+    .opsi img {
+        width: 50px;
+        height: 50px;
+        padding: 6px;
+    }
+    
+    .daftarIsi.muncul {
+        transform: translateY(-50%) translateX(240px);
+    }
+    
+    .isiDaftar {
+        width: 240px;
+    }
 }
